@@ -1,4 +1,4 @@
-🚕 Predicting Uber Ride Cancellations with Machine Learning
+# 🚕 Predicting Uber Ride Cancellations with Machine Learning
 I created an end-to-end machine learning pipeline using XGBoost on a real-world dataset to predict whether a ride will be cancelled before it even starts, using only booking details like pickup, drop, time, and vehicle type etc.
 
 📌 Problem Statement
