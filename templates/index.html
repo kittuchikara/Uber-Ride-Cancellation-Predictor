@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ride Cancellation Predictor</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>Uber Ride Cancellation Predictor</h2>
+    <form method="post" action="/predict">
+        <input type="number" name="avg_ctat" placeholder="Average CTAT (float)" step="0.01" required>
+        <input type="number" name="hour" placeholder="Hour of Day (0–23)" min="0" max="23" required>
+        <input type="number" name="day" placeholder="Day of Month (1–31)" min="1" max="31" required>
+        <input type="number" name="month" placeholder="Month (1–12)" min="1" max="12" required>
+        <input type="number" name="weekday" placeholder="Weekday (0=Monday)" min="0" max="6" required>
+
+        <select name="is_weekend" required>
+            <option value="" disabled selected>Is Weekend?</option>
+            <option value="0">Weekday</option>
+            <option value="1">Weekend</option>
+        </select>
+
+        <select name="vehicle" required>
+            <option value="" disabled selected>Select Vehicle</option>
+            {% for v in vehicle_types %}
+                <option value="{{v}}">{{v}}</option>
+            {% endfor %}
+        </select>
+
+        <select name="pickup" required>
+            <option value="" disabled selected>Select Pickup Location</option>
+            {% for p in pickup_locations %}
+                <option value="{{p}}">{{p}}</option>
+            {% endfor %}
+        </select>
+
+        <select name="drop" required>
+            <option value="" disabled selected>Select Drop Location</option>
+            {% for d in drop_locations %}
+                <option value="{{d}}">{{d}}</option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="customer_total_bookings" placeholder="Customer Total Bookings" min="0" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+    {% endif %}
+</body>
+</html>
